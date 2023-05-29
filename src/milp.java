@@ -87,9 +87,17 @@ public class milp {
             MILPRunner mr = new MILPRunner(dom_type, g);
 
             double[] domset = mr.run(timeout);
+
             int sum = 0;
-            for(int i = 0; i < domset.length; i++){
+            for(int i = 0; i < g.getN(); i++){
                 sum += domset[i];
+            }
+
+            if(dom_type == 4 || dom_type == 5){
+                for(int i = 0; i < g.getN(); i++){
+                    sum += 2*domset[g.getN()+i];
+                }
+    
             }
 
             
