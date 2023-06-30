@@ -315,7 +315,7 @@ public class MILPRunner {
             }
 
             for (int j = 0; j < N; j++) {
-                if(graph.isArc(i+1,j+1)){
+                if(graph.isEdge(i+1,j+1)){
 
                     if(domType == TWO_DOMINATION) {
                         constr = model.sum(constr, model.prod(0.5, variables[0][j]));
@@ -463,7 +463,7 @@ public class MILPRunner {
                 for (int kk = 0; kk < ni; kk++) {
                     int k = neighbours[kk]-1;
 
-                    if(graph.isArc(j+1,k+1)){
+                    if(graph.isEdge(j+1,k+1)){
                         //ykj - k in neighbourhood i and j
                         constr = model.sum(constr, model.prod(-1,variables[0][N + k*N + j+offset]));
                     }
@@ -512,7 +512,7 @@ public class MILPRunner {
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if(graph.isArc(i+1, j+1)){
+                if(graph.isEdge(i+1, j+1)){
                     wlookup[i][j] = count;
                     count++;
                 }
@@ -561,7 +561,7 @@ public class MILPRunner {
         //constraint 4
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if(graph.isArc(i+1, j+1)){
+                if(graph.isEdge(i+1, j+1)){
                     constr = model.prod(1, variables[0][wlookup[N][i]]);
                     constr = model.sum(constr, variables[0][wlookup[i][j]]);
                     constraints[0][icount] = model.addLe(constr, 1);
@@ -573,7 +573,7 @@ public class MILPRunner {
         //constraint 5
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if(graph.isArc(i+1, j+1)){
+                if(graph.isEdge(i+1, j+1)){
                     constr = model.prod(N+1, variables[0][wlookup[i][j]]);
                     constr = model.sum(constr, model.prod(N-1, variables[0][wlookup[j][i]]));
                     constr = model.sum(constr, variables[0][uoffset+i]);
