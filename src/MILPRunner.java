@@ -62,21 +62,28 @@ public class MILPRunner {
     public double[] run(double timeout) throws IloException {
 
         buildModel();
-        MILPCallback mc = new MILPCallback(timeout);
-        model.use(mc);
-        model.solve();
 
-        double[] solution = model.getValues(variables[0]);
+        double[] solution; 
 
-        /*
-         for (int j = 0; j < solution.length; ++j) {
-             System.out.pri     ntln("Variable " + j + ": Value = " + solution[j]);
-         }
-        */
-        run_state = model.getStatus().toString();
+        try{
+            MILPCallback mc = new MILPCallback(timeout);
+            model.use(mc);
+            model.solve();
 
-        model.end();
+            solution = model.getValues(variables[0]);
 
+            /*
+            for (int j = 0; j < solution.length; ++j) {
+                System.out.pri     ntln("Variable " + j + ": Value = " + solution[j]);
+            }
+            */
+            run_state = model.getStatus().toString();
+
+            model.end();
+        }
+        catch(CpxException exception){
+            solution = new double[variables[0].length];
+        }
 
 
         return solution;
@@ -614,8 +621,6 @@ public class MILPRunner {
             constraints[1][ecount] = model.addEq(1, constr);
             ecount++;
         }
-
-        System.out.println(constraints[0].length + ", " + icount + ": " + constraints[1].length + ", " + ecount + " : " + variables[0].length + ", " + (uoffset+N+1));
 
 
     }

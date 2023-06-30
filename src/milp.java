@@ -25,6 +25,7 @@ public class milp {
             System.out.println(" 6 - connected");
             System.out.println(" 7 - upper 1");
             System.out.println(" 8 - upper 2");
+            System.out.println(" 9 - two domination");
             return;
         }
 
