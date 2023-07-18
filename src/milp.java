@@ -91,12 +91,12 @@ public class milp {
 
             int sum = 0;
             for(int i = 0; i < g.getN(); i++){
-                sum += domset[i];
+                sum += Math.round(domset[i]);
             }
 
             if(dom_type == 4 || dom_type == 5){
                 for(int i = 0; i < g.getN(); i++){
-                    sum += 2*domset[g.getN()+i];
+                    sum += 2*Math.round(domset[g.getN()+i]);
                 }
     
             }

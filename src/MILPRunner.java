@@ -83,6 +83,7 @@ public class MILPRunner {
         }
         catch(CpxException exception){
             solution = new double[variables[0].length];
+            run_state = exception.getMessage().split(":")[1].strip();
         }
 
 
